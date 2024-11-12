@@ -2,27 +2,42 @@
 #include <stdio.h>
 #include <iostream>
 #include "ship.h"
+#include "game.h"
 
 sf::Texture spritesheet;
 sf::Sprite invader;
-sf::RenderWindow window(sf::VideoMode({ 200, 200 }), "SFML works!");
+sf::RenderWindow window(sf::VideoMode({ 900, 600 }), "SFML works!");
 
 std::vector<Ship*> ships;
 
 float dt = 1.f;
 
 void Load() {
-    if (!spritesheet.loadFromFile("C:/Users/Cameron/Documents/GitHub/Games-Engineering-Project/res/invaders_sheet.png")) {
+    if (!spritesheet.loadFromFile("invaders_sheet.png")) {
         std::cerr << "Failed to load spritesheet!" << std::endl;
     }
     invader.setTexture(spritesheet);
     invader.setTextureRect(sf::IntRect(0, 0, 32, 32));
 
-    Invader* inv = new Invader(sf::IntRect(160, 32, 32, 32), { 100,100 });
-    ships.push_back(inv);
+    //Invader* inv = new Invader(sf::IntRect(160, 32, 32, 32), { 100,100 });
+    //ships.push_back(inv);
 
-    Invader* inv2 = new Invader(sf::IntRect(0, 0, 32, 32), { 48,16 });
-    ships.push_back(inv2);
+    for (int r = 0; r < invaders_rows; r++) {
+        auto rect = sf::IntRect(0, 0, 32, 32);
+        auto position = sf::Vector2f(0.f, 0.f);
+
+        for (int c = 0; c <= invaders_columns; c++) {
+            if (c == 0) {
+                position = sf::Vector2f(32, r * 32 + 32);
+            }
+            else {
+                position = sf::Vector2f(c * 32, r * 32 + 32);
+            }
+
+            auto inv = new Invader(rect, position);
+            ships.push_back(inv);
+        }
+    }
 }
 
 void Update() {

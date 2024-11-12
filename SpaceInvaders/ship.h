@@ -16,4 +16,13 @@ public:
 	Invader(sf::IntRect ir, sf::Vector2f pos);
 	Invader();
 	void Update(const float &dt) override;
+
+	static bool direction;
+	static float speed;
+};
+
+class Player : public Ship {
+public:
+	Player();
+	void Update(const float& dt) override;
 };
