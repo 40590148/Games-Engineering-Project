@@ -6,7 +6,7 @@
 
 sf::Texture spritesheet;
 sf::Sprite invader;
-sf::RenderWindow window(sf::VideoMode({ 900, 600 }), "SFML works!");
+sf::RenderWindow window(sf::VideoMode({ 500, 300 }), "SFML works!");
 
 std::vector<Ship*> ships;
 
@@ -56,12 +56,12 @@ void Render() {
 
 int main(){
   while (window.isOpen()){
-      sf::Event event;
-      while (window.pollEvent(event)){
+     sf::Event event;
+     while (window.pollEvent(event)){
         if (event.type == sf::Event::Closed){
             window.close();
-      }
-    }
+        }
+     }
     window.clear();
     Load();
     Update();

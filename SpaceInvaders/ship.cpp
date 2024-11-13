@@ -6,8 +6,9 @@ using namespace std;
 Ship::Ship() {};
 Invader::Invader() : Ship() {};
 
-bool Invader::direction;
-float Invader::speed;
+bool Invader::direction = true;
+float Invader::speed = 1.f;
+float Player::direction;
 
 const Keyboard::Key controls[4] = {
 	Keyboard::W,
@@ -34,7 +35,7 @@ void Invader::Update(const float &dt) {
 	Ship::Update(dt);
 
 	move(Vector2f(dt * (direction ? 1.f : -1.f) * speed, 0.f));
-
+	
 	if ((direction && getPosition().x > gameWidth - 16) || (!direction && getPosition().x < 16)) {
 		direction = !direction;
 
